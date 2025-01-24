@@ -1,0 +1,78 @@
+﻿﻿@using MG.Models
+
+@model Fam
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form method="post" asp-action="addFam">
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter a Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Size">Size</label>
+        <input asp-for="Size" class="form-control" placeholder="# of Members in Household" />
+        <span asp-validation-for="Size" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Par.Par1">Parent1</label>
+        <input asp-for="Par.Par1" class="form-control" placeholder="Primary Care Giver Full Name" />
+        <span asp-validation-for="Par.Par1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Par2">Parent2</label>
+        <input asp-for="Par.Par2" class="form-control" placeholder="Secondary Care Giver Full Name" />
+        <span asp-validation-for="Par.Par2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Email">Parent Email</label>
+        <input asp-for="Par.Email" class="form-control" placeholder="Parent Email" />
+        <span asp-validation-for="Par.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Phone">Parent Phone</label>
+        <input asp-for="Par.Phone" class="form-control" placeholder="Parent Phone" />
+        <span asp-validation-for="Par.Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Pin">Parent Pin</label>
+        <input asp-for="Par.Pin" class="form-control" placeholder="4 Digit Pin" />
+        <span asp-validation-for="Par.Pin" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Emg">Required Emergency Contact</label>
+        <input asp-for="Par.Emg" class="form-control" placeholder="Required to have One Emergency Contact" />
+        <span asp-validation-for="Par.Emg" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.EmgPhone">Required Emergency Phone Number</label>
+        <input asp-for="Par.EmgPhone" class="form-control" placeholder="Required to have Emergency Phone Number" />
+        <span asp-validation-for="Par.EmgPhone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.EmgEmail">Optional Emergency Email</label>
+        <input asp-for="Par.EmgEmail" class="form-control" placeholder="Optional Emergency Email" />
+        <span asp-validation-for="Par.EmgEmail" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Emg1">Optional Emergency Contact</label>
+        <input asp-for="Par.Emg1" class="form-control" placeholder="Optional 2nd Emergency Contact" />
+        <span asp-validation-for="Par.Emg1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Emg1Phone">Optional Emergency Phone Number</label>
+        <input asp-for="Par.Emg1Phone" class="form-control" placeholder="Optional Emergency Phone Number" />
+        <span asp-validation-for="Par.Emg1Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Par.Emg1Email">Optional Second Emergency Email</label>
+        <input asp-for="Par.Emg1Email" class="form-control" placeholder="Optional Second Emergency Email" />
+        <span asp-validation-for="Par.Emg1Email" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

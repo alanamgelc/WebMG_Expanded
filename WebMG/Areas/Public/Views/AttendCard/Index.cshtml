@@ -1,0 +1,83 @@
+﻿@using MG.Models
+ @model IEnumerable<AttendCard>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<a type="button" class="btn btn-primary btn-lg" asp-action="AddTime">Create</a>
+
+
+ <table class="table">
+    <thead>
+        <tr>
+      @*       <th>
+                @Html.DisplayNameFor(model => model.SchoolDay)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.TimeIn)
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.TimeOut)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.IsPresent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stu)
+            </th>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.Par)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emp)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Stu.ClassCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+          @*   <td>
+                @Html.DisplayFor(modelItem => item.SchoolDay)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeIn)
+            </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.TimeOut)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPresent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stu.FName)
+            </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Par.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp.Id)
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stu.ClassCategory)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table> 

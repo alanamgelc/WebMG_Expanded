@@ -1,0 +1,91 @@
+﻿@using MG.Models
+@model AttendCard
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Student Sign-In</h1>
+
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <p style="color:green;">@ViewBag.sucess</p>
+        <form asp-action="Create2">
+          <div class="form-group">
+                <label asp-for="StuId" class="control-label">Student</label>
+                <select asp-for="StuId" class="form-control" asp-items="ViewBag.StuId">
+                    <option disabled selected>Select Student</option>
+                    @foreach (var i in ViewBag.getSs)
+                    {
+                        <option value="@i.Id">@i.FName</option>
+                    }
+                </select>
+
+            </div>
+            <!-- Drop-off Person Dropdown -->
+            <div class="form-group">
+                <label asp-for="ParId" class="control-label">Drop-Off Person</label>
+                <select asp-for="ParId" class="form-control">
+                    <option disabled selected>Select Drop Off Person</option>
+                    @foreach (var i in ViewBag.getPs)
+                    {
+                        <option value="@i.Id">@i.Par1</option>
+                        @if (!string.IsNullOrEmpty(i.Par2))
+                        {
+                            <option value="@i.Id">@i.Par2</option>
+                        }
+                        @if (!string.IsNullOrEmpty(i.Emg))
+                        {
+                            <option value="@i.Id">@i.Emg</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpId" class="control-label">Teacher</label>
+                <select asp-for="EmpId" class="form-control" asp-items="ViewBag.EmpId">
+                    <option disabled selected>Select Teacher</option>
+                    @foreach (var i in ViewBag.getEs)
+                    {
+                        <option value="@i.Id">@i.Name</option>
+                       
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label">Notes</label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+         
+            <div class="form-group">
+                <label asp-for="SchoolDay" class="control-label">SchoolDay</label>
+                <input asp-for="SchoolDay" class="form-control" type="date" />
+                <span asp-validation-for="SchoolDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeIn" class="control-label">Arrival Time</label>
+                <input asp-for="TimeIn" class="form-control" type="datetime" />
+                <span asp-validation-for="TimeIn" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input asp-for="IsPresent" class="form-check-input" type="checkbox" />
+                    <label asp-for="IsPresent" class="form-check-label"></label>
+                </div>
+                <span asp-validation-for="IsPresent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

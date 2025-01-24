@@ -1,0 +1,109 @@
+﻿@using MGWeb.Areas.Public.ViewModels
+@model FamilyStudentViewModel
+<h1>Create Record of Attendance</h1>
+
+<form asp-action="AddTime">
+    <div class="form-group">
+        <label asp-for="SelectedFamilyId" class="control-label">Family</label>
+        <select  class="form-control" id="familyDropdown">
+            <option disabled selected>Select Family</option>
+            @foreach (var family in Model.Families)
+            {
+                <option value="@family.Value">@family.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedParentId" class="control-label">Parent</label>
+        <select asp-for="ParId" class="form-control" id="parentDropdown">
+            <option disabled selected>Select Parent</option>
+             </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedStudentId" class="control-label">Student</label>
+        <select asp-for="StuId" class="form-control" id="studentDropdown">
+            <option disabled selected>Select Student</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="EmpId" class="control-label">Teacher</label>
+        <select asp-for="EmpId" class="form-control" asp-items="ViewBag.EmpId">
+            <option disabled selected>Select Teacher</option>
+            @foreach (var i in ViewBag.getEs)
+            {
+                <option value="@i.Id">@i.Name</option>
+
+            }
+        </select>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Notes" class="control-label">Notes</label>
+        <input asp-for="Notes" class="form-control" />
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SchoolDay" class="control-label">School Day</label>
+        <input asp-for="SchoolDay" class="form-control" type="date"
+               value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="SchoolDay" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TimeIn" class="control-label">Arrival Time</label>
+        <input asp-for="TimeIn" class="form-control" type="datetime"
+        value="@DateTime.Now.ToString("HH:mm")"/>
+        
+        <span asp-validation-for="TimeIn" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="form-check">
+            <input asp-for="IsPresent" class="form-check-input" type="checkbox" 
+            checked="checked"/>
+            <label asp-for="IsPresent" class="form-check-label"></label>
+        </div>
+        <span asp-validation-for="IsPresent" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Create" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#familyDropdown').change(function () {
+                var familyId = $(this).val();
+                $('#parentDropdown').empty().append('<option disabled selected>Select Parent</option>');
+                $('#studentDropdown').empty().append('<option disabled selected>Select Student</option>');
+
+                if (familyId) {
+
+
+                                     $.ajax({
+                     url: '@Url.Action("GetParents")',
+                     type: 'POST',
+                     data: { familyId: familyId },
+                     success: function (data) {
+                         $.each(data, function (i, parent) {
+                             $('#parentDropdown').append('<option value="' + parent.value + '">' + parent.text + '</option>');
+                         
+                         });
+                     }
+                 });
+                    $.ajax({
+                        url: '@Url.Action("GetStudents")',
+                        type: 'POST',
+                        data: { familyId: familyId },
+                        success: function (data) {
+                            $.each(data, function (i, student) {
+                                $('#studentDropdown').append('<option value="' + student.value + '">' + student.text + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

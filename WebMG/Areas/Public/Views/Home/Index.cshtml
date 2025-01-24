@@ -1,0 +1,51 @@
+﻿@using MG.Models;
+@using MGWeb.Areas.Public.ViewModels;
+@model FamStuViewModel
+@{
+    ViewData["Title"] = "Filter Students by Class Category";
+}
+
+<h2>Filter Students by Class Category</h2>
+
+<form asp-action="FilterByClassCategory" method="post">
+    <div class="form-group">
+        <label for="SelectedClassCategory">Select Class Category</label>
+        <select asp-for="SelectedClassCategory" class="form-control" asp-items="@(Html.GetEnumSelectList<ClassCategory>())">
+            <option value="">-- Select Class Category --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter Students</button>
+</form>
+
+<hr />
+
+<h3>Students</h3>
+@if (Model.Stus != null && Model.Stus.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Class Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Stus)
+            {
+                <tr>
+                    <td>@student.FName</td>
+                    <td>@student.LName</td>
+                    <td>@student.DOB</td>
+                    <td>@student.ClassCategory</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No students found for the selected class category.</p>
+}

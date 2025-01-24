@@ -1,0 +1,8 @@
+﻿@using MG.Models
+@model List<Stu>
+@foreach(var student in Model)
+{
+    <li>@student.FName</li>
+    <li>@student.LName</li>
+    <li>@student.DOB</li>
+}

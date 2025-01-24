@@ -1,0 +1,65 @@
+﻿@using MGWeb.Areas.Public.ViewModels
+@model FamStuViewModel
+
+@{
+    ViewData["Title"] = "Filter Students by Family";
+}
+<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold"> MG Families</h1>
+        <p class="col-md-8 fs-4"></p>
+        <a type="button" class="btn btn-primary btn-lg" asp-action="addFam">Create</a>
+
+    </div>
+</div>
+<h2>Filter Students by Family</h2>
+
+<form asp-action="FilterByFamilies" method="post">
+    <div class="form-group">
+        <label>Select Families</label>
+        <div>
+            @foreach (var family in Model.Fams)
+            {
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="SelectedFamIds" value="@family.Id"
+                    @(Model.SelectedFamIds.Contains(family.Id) ? "checked" : "") />
+                    <label class="form-check-label">@family.Name</label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter Students</button>
+</form>
+
+<hr />
+
+<h3>Students</h3>
+@if (Model.Stus != null && Model.Stus.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Family</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Stus)
+            {
+                <tr>
+                    <td>@student.FName</td>
+                    <td>@student.LName</td>
+                    <td>@student.DOB</td>
+                    <td>@student.Fam.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No students found for the selected families.</p>
+}

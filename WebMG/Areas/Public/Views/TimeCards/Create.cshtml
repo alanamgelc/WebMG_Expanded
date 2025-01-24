@@ -1,0 +1,66 @@
+﻿@using MG.Models
+@model             TimeCard
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>TimeCard</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="EmpId" class="control-label">Employee</label>
+                <select asp-for="EmpId" class="form-control" asp-items="ViewBag.EmpId">
+                    <option disabled selected>Select Employee</option>
+                    @foreach (var i in  ViewBag.getEs)
+                    {
+                        <option value="@i.Id">@i.Name</option>
+                    }
+                </select>
+
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*     <div class="form-group">
+                <label asp-for="Start" class="control-label"></label>
+                <input asp-for="Start" class="form-control" />
+                <span asp-validation-for="Start" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="Start" class="control-label">Start Time</label>
+                <input asp-for="Start" class="form-control" type="datetime-local"
+                       value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                <span asp-validation-for="Start" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Finish" class="control-label">Finish Time</label>
+                <input asp-for="Finish" class="form-control" type="datetime-local"
+                       value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                <span asp-validation-for="Finish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <select asp-for="TimeCategory" asp-items="@Html.GetEnumSelectList<TimeCategory>()" class="form-control form-control-lg">
+                    <option>--Select--</option>
+                </select>
+                <span asp-validation-for="TimeCategory" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

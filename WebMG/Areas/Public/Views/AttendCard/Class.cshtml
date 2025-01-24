@@ -1,0 +1,133 @@
+﻿@using MG.Models;
+@using MGWeb.Areas.Public.ViewModels
+@model ClassWStusViewModel
+
+<h2>Filter Attendance by Class Category</h2>
+
+<form asp-action="FilterByClassCategory" method="get">
+    <div class="form-group">
+        <label for="SelectedClassCategory">Filter by Class Category:</label>
+        <select asp-for="SelectedClassCategory" asp-items="Html.GetEnumSelectList<ClassCategory>()" class="form-control">
+            <option value="">-- Select Class Category --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<h3>Attendance Cards</h3>
+@if (Model.AttendCards != null && Model.AttendCards.Any())
+
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Class Category</th>
+                <th>Time In</th>
+                <th>Is Present</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ac in Model.AttendCards)
+
+            {
+                <tr>
+                    <td>@ac.Stu?.FName</td> <!-- Use null-conditional operator to avoid NullReferenceException -->
+                    <td>@ac.Stu?.ClassCategory.ToString()</td>
+                    <td>@ac.TimeIn</td> <!-- Display Time In in HH:mm format -->
+                    <td>@(ac.IsPresent ? "Yes" : "No")</td>
+                    <td>@ac.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+else
+
+{
+    <p>No attendance cards found for the selected class category.</p>
+}
+
+
+@* @model WebMG.ViewModels.ClassWStusViewModel
+
+<h2>Filter Attendance by Class Category</h2>
+
+<form asp-action="FilterByClassCategory" method="get">
+    <div class="form-group">
+        <label for="SelectedClassCategory">Filter by Class Category:</label>
+        <select asp-for="SelectedClassCategory" asp-items="Html.GetEnumSelectList<ClassCategory>()" class="form-control">
+            <option value="">-- Select Class Category --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<h3>Students that have checked in</h3>
+@if (Model.AttendCards != null && Model.AttendCards.Any())
+
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Class Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ac in Model.AttendCards)
+
+            {
+                <tr>
+                    <td>@ac.Stu.FName</td>
+                    <td>@ac.Stu.ClassCategory</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+else
+
+{
+    <p>No students found for the selected class category.</p>
+}
+ *@
+
+
+@* @model WebMG.ViewModels.ClassWStusViewModel
+
+<form asp-action="FilterByClassCategory" method="get">
+    <div class="form-group">
+        <label for="SelectedClassCategory">Filter by Class Category:</label>
+        <select asp-for="SelectedClassCategory" asp-items="Html.GetEnumSelectList<ClassCategory>()" class="form-control">
+            <option value="">-- Select Class Category --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Class Category</th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attendCard in Model.AttendCards)
+
+        {
+            <tr>
+                <td>@attendCard.Stu?.FName</td> <!-- Display Student's First Name -->
+                <td>@attendCard.Stu?.ClassCategory</td> <!-- Display Class Category if needed -->
+            </tr>
+        }
+    </tbody>
+</table> *@ 

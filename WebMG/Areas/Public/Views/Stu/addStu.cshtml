@@ -1,0 +1,75 @@
+﻿@using MG.Models
+@model Stu
+
+@{
+    ViewData["Title"] = "addStu";
+}
+
+<h1>New Student</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <p style="color:green;">@ViewBag.sucess</p>
+        <form asp-action="addStu">
+      @*       <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="FamId" class="control-label">Family</label>
+                <select asp-for="FamId" class="form-control" asp-items="ViewBag.FamId">
+                    <option disabled selected>Select Family</option>
+                    @foreach (var i in ViewBag.getFam)
+                    {
+                        <option value="@i.Id">@i.Name</option>
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="FName" class="control-label">First Name</label>
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LName" class="control-label">Last Name</label>
+                <input asp-for="LName" class="form-control" />
+                <span asp-validation-for="LName" class="text-danger"></span>
+            </div>
+                 <div class="form-group">
+                <label asp-for="DOB" class="control-label">DOB</label>
+                <input asp-for="DOB" class="form-control" type="date" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <select asp-for="ClassCategory" asp-items="@Html.GetEnumSelectList<ClassCategory>()" class="form-control form-control-lg">
+                    <option>--Select--</option>
+                </select>
+                <span asp-validation-for="ClassCategory" class="text-danger"></span>
+            </div>
+   
+            <div class="form-group">
+                <div class="form-check">
+                    <input asp-for="Active" class="form-check-input" type="checkbox" />
+                    <label asp-for="Active" class="form-check-label"></label>
+                </div>
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
